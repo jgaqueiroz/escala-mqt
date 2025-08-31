@@ -124,9 +124,9 @@ html,body,#root,.app{
   border-bottom: 1px solid #2a2a2a;
 }
 .year-row button{
-  background:#f7f7f7;
-  color:#111;
-  border:1px solid #333;
+  background:#1c1c1c;
+  color:#fff;
+  border:none;
   padding:6px 10px;
   cursor:pointer;
   font-weight:700;
