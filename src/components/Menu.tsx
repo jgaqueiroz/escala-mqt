@@ -21,7 +21,7 @@ export function Menu({ selected, setSelected, year, setYear }: Props) {
 
       {/* letras das escalas - linha inferior do rodapé */}
       <div className="scales-row">
-        {LETTERS.map((l, idx) => (
+        {LETTERS.map((l) => (
           <button
             key={l}
             className={`scale-btn ${selected === l ? "active" : ""}`}

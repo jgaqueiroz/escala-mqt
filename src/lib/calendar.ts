@@ -24,10 +24,6 @@ function daysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
 }
 
-function startOfYear(year: number) {
-  return new Date(year, 0, 1);
-}
-
 export function buildYear(year: number): MonthData[] {
   // vamos caminhar dia a dia e manter um contador dayIndex (dentro do ano)
   let dayIndex = 0;
