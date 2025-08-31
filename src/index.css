@@ -1,68 +1,75 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+  --bg:#111; --panel:#1c1c1c; --cell:#e9e9e9; --muted:#dcdcdc;
+  --text:#fff; --text-dark:#111; --accent:#ffcc00;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+*{ box-sizing: border-box; }
+
+html,body,#root,.app{
+  height:100%;
+  margin:0;
+  font-family: Verdana, Geneva, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+/* Menus */
+.menutop{ position: sticky; top:0; z-index:5; background: var(--panel); padding:8px 8px 0; }
+.menu-row{ display:grid; grid-template-columns: repeat(7,1fr); gap:0; }
+.menu{
+  border:1px solid #333; background:#f7f7f7; color:#111; font-weight:700; font-size:16px;
+  padding:8px 0; cursor:pointer; border-radius:0;
+}
+.menu.first{ border-top-left-radius:10px; border-bottom-left-radius:10px; }
+.menu.last{ border-top-right-radius:10px; border-bottom-right-radius:10px; }
+.menu + .menu{ border-left:none; }
+.menuSelected{ background:#1c1c1c; color:#ffcc00; }
+
+/* Ano */
+.year-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:6px 0 8px; gap:8px;
+}
+.year-row button{ background:#f7f7f7; border:1px solid #333; padding:6px 10px; border-radius:6px; cursor:pointer; }
+.year-label{ font-weight:700; }
+
+/* Cabeçalho semana */
+.week-header{
+  display:grid; grid-template-columns: repeat(7, 1fr); background:#000; padding:8px;
+  position: sticky; top:48px; z-index:4; /* ajusta de acordo com a altura do menu */
+}
+.week-header .dow{ text-align:center; font-weight:900; }
+
+/* Mês */
+.month{ margin:8px; background:transparent; }
+.month-title{
+  background:#000; padding:8px; text-align:center; font-weight:900; border-radius:6px 6px 0 0;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+/* Grade de dias */
+.weeks{ display:flex; flex-direction:column; gap:6px; background:transparent; padding:8px 0; }
+.week{ display:grid; grid-template-columns: repeat(7, 1fr); gap:6px; }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.day{
+  font-weight: bold;
+  background: var(--cell);
+  color:#000;
+  border:1px solid #bbb;
+  text-align:center;
+  padding:10px 0;
+  border-radius:4px;
+  transition: background .25s ease, color .25s ease, opacity .2s ease;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+.day.off{ background:#cfcfcf; color:#777 !important; }
+.day.domingo{ color:#c21e1e; }
+.day.diaoffSome{ opacity: .25; }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* highlights por duty quando escala selecionada */
+.day.highlightT{ background:#efd25d ; color:#000; }
+.day.highlightN{ background:#39aaca ; color:#000; }
+.day.highlightF{ background:#badbc6 ; color:#fff; }
+
+/* rodapé */
+.footer{
+  position: sticky; bottom:0; background:#000; padding:8px; text-align:center; font-size:12px;
 }
