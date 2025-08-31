@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./index.css";
 import { Menu } from "./components/Menu";
 import { Calendar } from "./components/Calendar";
@@ -16,16 +16,15 @@ function getQueryParams(): { ano?: number; escala?: Scale } {
 }
 
 export default function App() {
-  // ano inicial: querystring ?ano=YYYY ou o ano atual
   const now = new Date();
   const qp = getQueryParams();
+
   const [year, setYear] = useState<number>(qp.ano ?? now.getFullYear());
   const [selected, setSelected] = useState<Scale | null>(qp.escala ?? null);
 
-  // recalcula meses quando o ano muda
   const months = useMemo(() => buildYear(year), [year]);
 
-  // sincroniza querystring a cada mudança (preserva deep-link)
+  // mantém ?ano= e ?escala= na URL
   useEffect(() => {
     const u = new URL(window.location.href);
     u.searchParams.set("ano", String(year));
@@ -34,30 +33,18 @@ export default function App() {
     window.history.replaceState(null, "", u.toString());
   }, [year, selected]);
 
-  // rola até o mês atual quando o ano mostrado for o atual
+  // rola para o mês atual quando o ano = ano atual
   useEffect(() => {
     if (year !== now.getFullYear()) return;
     const id = `mes-${now.getMonth()+1}`;
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.scrollBy({ top: -120, behavior: "smooth" }); // ajuste se tiver header fixo
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [year]);
 
   return (
     <div className="app">
-      <Menu selected={selected} setSelected={setSelected} year={year} setYear={setYear} />
       <Calendar months={months} selected={selected} />
-      <Footer />
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <div className="footer">
-      <div>desenvolvido por <strong>José Gomes</strong></div>
+      <Menu selected={selected} setSelected={setSelected} year={year} setYear={setYear} />
     </div>
   );
 }

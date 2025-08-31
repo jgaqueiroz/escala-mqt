@@ -6,18 +6,19 @@ type Props = {
   selected: Scale | null;
 };
 
-const DIA_LETTERS = ["D","S","T","Q","Q","S","S"]; // cabeçalho: Dom..Sáb
+const DIA_LETTERS = ["D","S","T","Q","Q","S","S"]; // Dom..Sáb
 
 export function Calendar({ months, selected }: Props) {
   return (
-    <div className="calendar">
-      {/* cabeçalho dos dias da semana */}
+    <div className="content">
+      {/* TOPO FIXO: barra com iniciais dos dias da semana */}
       <div className="week-header">
         {DIA_LETTERS.map((d) => (
-          <div key={d} className="dow">{d}</div>
+          <div key={d} style={{textAlign:"center"}}>{d}</div>
         ))}
       </div>
 
+      {/* Meses: cada título é sticky logo abaixo da barra dos dias */}
       {months.map((m) => (
         <section key={m.month} id={`mes-${m.month+1}`} className={`month mes${m.month+1}`}>
           <div className="month-title">{m.label}</div>
@@ -41,9 +42,7 @@ function Day({ cell, selected }: { cell: DayCell; selected: Scale | null }) {
   const n = cell.date.getDate();
   const isSunday = cell.dow === 0;
 
-  // classes de destaque conforme escala selecionada
   const duty = selected ? cell.duties[selected] : null; // "T" | "N" | "F" | null
-
   const cls = [
     "day",
     cell.inMonth ? "in" : "off",
@@ -52,9 +51,7 @@ function Day({ cell, selected }: { cell: DayCell; selected: Scale | null }) {
     duty === "N" ? "highlightN" : "",
     duty === "F" ? "highlightF" : "",
     selected && !cell.inMonth ? "diaoffSome" : "",
-  ]
-  .filter(Boolean)
-  .join(" ");
+  ].filter(Boolean).join(" ");
 
-  return <div className={cls}>{n.toString().padStart(2, "0")}</div>;
+  return <div className={cls}>{String(n).padStart(2, "0")}</div>;
 }
