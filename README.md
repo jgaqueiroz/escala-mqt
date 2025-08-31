@@ -1,69 +1,80 @@
-# React + TypeScript + Vite
+# 📅 Escala MQTs – CBTU Recife
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Abrir Escala MQTs](https://img.shields.io/badge/🌐%20Acessar%20o%20App-escalamqt.effecta.com.br-blue?style=for-the-badge)](https://escalamqt.effecta.com.br)
 
-Currently, two official plugins are available:
+Bem-vindo(a) ao **Escala MQTs**, um app simples, rápido e direto para visualizar a **escala anual dos maquinistas da CBTU Recife**.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Aqui você encontra, de forma organizada, as escalas **A, B, C, D, E, F e R**, com todos os dias do ano e os respectivos turnos destacados. Sem precisar recorrer a tabelas confusas, PDFs escondidos ou planilhas complicadas. 😉
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚂 O que é esse app?
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Mostra a **escala completa dos maquinistas** para o ano selecionado.  
+- Suporte para as escalas de **revezamento**:
+  - **A, C, E** → 5 dias de trabalho no turno principal, 1 noite, 3 folgas.  
+  - **B, D, F** → 4 dias de trabalho no turno principal, 2 noites, 3 folgas.  
+- Suporte para a escala **R (Reforço)** → segunda a sexta.  
+- Cada turno é destacado por cor:
+  - 🌞 **Trabalho no turno principal**  
+  - 🌙 **Trabalho no turno noturno**  
+  - 💤 **Folga**  
+- Navegação **ano a ano** com botões fixos no rodapé.  
+- Seleção rápida da escala (A–F ou R) com menu fixo na parte de baixo.  
+- Cabeçalhos dos meses e dias da semana são **fixos ao rolar**, deixando a navegação intuitiva.  
+- Design **responsivo e mobile-first**, perfeito para consulta rápida no celular. 📱
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Tecnologias usadas
+
+- [React](https://react.dev/) + [Vite](https://vitejs.dev/)  
+- TypeScript  
+- CSS puro (com variáveis e sticky headers)  
+- Deploy automático com GitHub Actions + SSH  
+
+---
+
+## 👩‍💻 Como rodar localmente
+
+Clone o repositório:
+
+```bash
+https://github.com/jgaqueiroz/escala-mqt.git
+cd escala-mqt
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Instale as dependências:
+```bash
+npm install
 ```
+Rode em modo desenvolvimento:
+```bash
+npm run dev
+```
+Acesse em: http://localhost:5173
+
+Build de produção:
+```bash
+npm run build
+```
+---
+## 🌐 Deploy
+
+O app é estático, então o conteúdo do diretório dist/ pode ser hospedado em qualquer servidor web (Apache, Nginx, GitHub Pages, etc.).
+
+Neste projeto usamos deploy automático via GitHub Actions:
+a cada git push main, o app é buildado e enviado direto para o servidor.
+
+---
+
+## 🤔 Por que esse app?
+
+Porque consultar a escala dos maquinistas não precisa ser complicado.
+Agora você abre o app, escolhe sua escala e pronto: sabe quando vai trabalhar, quando estará à noite e quando pode aproveitar a folga. 🚆✨
+
+---
+
+## ⚖️ Licença
+
+Este projeto é livre para uso e adaptação.
+A ideia é simples: facilitar a vida dos maquinistas no dia a dia.
