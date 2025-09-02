@@ -36,9 +36,13 @@ export default function App() {
   // rola para o mês atual quando o ano = ano atual
   useEffect(() => {
     if (year !== now.getFullYear()) return;
-    const id = `mes-${now.getMonth()+1}`;
+    const id = `mes-${now.getMonth() + 1}`;
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (el) {
+      const headerOffset = 50; // --weekbar-h
+      const y = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   }, [year]);
 
   return (
