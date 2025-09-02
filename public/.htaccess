@@ -1,0 +1,37 @@
+# Garante que index.html é o padrão
+DirectoryIndex index.html
+
+RewriteEngine On
+
+# Redireciona /index.php para / 
+RewriteCond %{THE_REQUEST} \s/+index\.php[\s?]
+RewriteCond %{REQUEST_URI} ^(.*/)?index\.php$
+RewriteRule ^index\.php$ %1 [R=301,L]
+
+# /A, /B, /C, /D, /E, /F ou /R -> /?escala=<letra>
+RewriteRule ^[Aa]/?$ /?escala=A [R=301,L]
+RewriteRule ^[Bb]/?$ /?escala=B [R=301,L]
+RewriteRule ^[Cc]/?$ /?escala=C [R=301,L]
+RewriteRule ^[Dd]/?$ /?escala=D [R=301,L]
+RewriteRule ^[Ee]/?$ /?escala=E [R=301,L]
+RewriteRule ^[Ff]/?$ /?escala=F [R=301,L]
+RewriteRule ^[Rr]/?$ /?escala=R [R=301,L]
+
+# HTML: sem cache
+<FilesMatch "\.(html|htm)$">
+  Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  Header always set Pragma "no-cache"
+  Header always set Expires "0"
+</FilesMatch>
+
+<FilesMatch "\.(?:js|css|png|jpg|jpeg|gif|webp|svg|ico|woff2?)$">
+  Header unset Cache-Control
+  Header unset Pragma
+  Header unset Expires
+
+  <IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+  </IfModule>
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
