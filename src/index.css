@@ -74,7 +74,6 @@ html,body,#root,.app{
   font-size: .6em;
   letter-spacing: 2px;
   font-weight:900;
-  border-bottom: 1px solid #222;
 }
 
 /* Contêiner do mês e das semanas */
